@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Image, SafeAreaView, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Constants from "expo-constants";
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,7 +12,7 @@ export default function App() {
     {
       username: 'phngtrnh',
       avatarUrl: require("./assets/1.jpg"),
-      intro: 'AAAAAAAAAAAAAAAAAAAAAAA',
+      intro: 'Student at USTH',
     },
   ];
   const imgData = [
@@ -24,7 +24,7 @@ export default function App() {
     { id: 6, imgSource: require('./assets/6.jpg')},
     { id: 7, imgSource: require('./assets/7.jpg')},
     { id: 8, imgSource: require('./assets/8.jpg')},
-    { id: 9, imgSource: require('./assets/9.jpg')},
+    // { id: 9, imgSource: require('./assets/9.jpg')},
   ];
   const centerImgData = Math.floor(imgData.length/2);
 
@@ -32,8 +32,8 @@ export default function App() {
   return (
 <>
     <View style={styles.bar}>
-      <Ionicons name="ios-arrow-back" size={24} color="black" />
-      <Entypo name="menu" size={24} color="black" />
+    <TouchableOpacity activeOpacity={0.5}><Ionicons name="ios-arrow-back" size={24} color="black" /></TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.5}><Entypo name="menu" size={24} color="black" /></TouchableOpacity>
     </View>
     
     <View>
@@ -44,13 +44,24 @@ export default function App() {
             <Text style={styles.username}>{user.username}</Text>
             <Text style={styles.intro}>{user.intro}</Text> 
             <View style={{flexDirection:'row'}}>
+            <TouchableOpacity activeOpacity={0.75} onPress={() => {alert("Followed!")}}>
               <View style={
-                {backgroundColor: '#393b44', marginRight: 12, borderRadius: 30, width: 150, alignItems:'center', }}>
-                    <Button color="white" title="Follow"/>
+                {backgroundColor: '#393b44',padding:5, marginRight: 12, borderRadius: 30, width: 150, alignItems:'center', 
+                shadowColor: "#000", shadowOffset: {width: 0, height: 1,},
+                shadowOpacity: 0.22, shadowRadius: 2.22, elevation: 3,}}>
+                    {/* <Button color="white" title="Follow"/> */}
+                    
+                      <Text style={{fontSize: 20, color: 'white'}}>Follow</Text>
+                    
               </View>
-              <View style={{backgroundColor: '#393b44', alignItems:'center', padding: 5, width: 50, marginRight: 12, borderRadius: 40}}>
-                <Feather name="message-circle" size={24} color="white"  />
-              </View>
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.75}  onPress={() => {alert("Message sended!")}}>
+                <View style={{backgroundColor: '#393b44', alignItems:'center', padding: 5, width: 50, marginRight: 12, borderRadius: 40,
+                shadowColor: "#000", shadowOffset: {width: 0, height: 1,},
+                shadowOpacity: 0.22, shadowRadius: 2.22, elevation: 3,}}>
+                 <Feather name="message-circle" size={24} color="white"  />
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -91,7 +102,18 @@ export default function App() {
         </View>
       </View>
       </ScrollView>
-</>
+      <View style={styles.banner}>
+      <TouchableOpacity activeOpacity={0.75}>
+        <Entypo name="menu" size={24} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.75}>
+        <Entypo name="circle" size={24} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.75}>
+        <Entypo name="chevron-left" size={24} color="black" />
+      </TouchableOpacity>
+    </View>
+  </>
   );
 }
 
@@ -161,18 +183,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 3,
   },
-  imagesEven: {
-    width: 170,
-    height: 170,
-    justifyContent: 'space-between',
-    borderRadius: 15,
-    margin: 10,
-  },
-  imagesOdd: {
-    width: 170,
-    height: 220,
-    justifyContent: 'space-between',
-    borderRadius: 15,
-    margin: 10,
+  banner: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginLeft: 60,
+    marginRight: 60,
+    // paddingHorizontal: 30,
+    paddingVertical: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+	    height: 5,
+    },
+  shadowOpacity: 0.36,
+  shadowRadius: 6.68,
+
+  elevation: 11,
   }
 });
